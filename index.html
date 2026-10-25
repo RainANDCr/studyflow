@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#f7f7fb" />
+    <meta name="description" content="知行 StudyFlow — 本地离线的学习目标管理：把终点变成今天的一小步。" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script>
+      // 预着色：在应用挂载前按已保存的偏好设置深/浅色，避免首屏闪白（与 src/state/theme.ts 共用键名）
+      ;(function () {
+        try {
+          var pref = localStorage.getItem('studyflow-theme-preference')
+          if (pref !== 'light' && pref !== 'dark') pref = 'system'
+          var dark =
+            pref === 'dark' ||
+            (pref === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)
+          document.documentElement.classList.toggle('dark', dark)
+          var meta = document.querySelector('meta[name="theme-color"]')
+          if (meta) meta.setAttribute('content', dark ? '#101118' : '#f7f7fb')
+        } catch (e) {}
+      })()
+    </script>
+    <title>知行 StudyFlow</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

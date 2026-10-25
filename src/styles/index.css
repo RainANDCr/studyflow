@@ -1,0 +1,147 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --c-base: 247 247 251;
+  --c-surface: 255 255 255;
+  --c-surface2: 242 242 247;
+  --c-line: 228 229 238;
+  --c-ink: 30 32 45;
+  --c-ink2: 92 96 115;
+  --c-ink3: 148 151 166;
+  --c-primary: 108 78 255;
+  --c-primary2: 79 70 229;
+  --c-primary-soft: 238 234 255;
+  --c-ok: 15 143 96;
+  --c-ok-soft: 221 244 233;
+  --c-warn: 190 126 26;
+  --c-warn-soft: 253 240 219;
+  --c-danger: 210 66 66;
+  --c-danger-soft: 252 231 231;
+}
+
+.dark {
+  --c-base: 16 17 24;
+  --c-surface: 25 26 37;
+  --c-surface2: 35 37 50;
+  --c-line: 45 47 63;
+  --c-ink: 235 236 242;
+  --c-ink2: 176 179 193;
+  --c-ink3: 123 126 141;
+  --c-primary: 139 116 255;
+  --c-primary2: 108 96 255;
+  --c-primary-soft: 43 38 76;
+  --c-ok: 62 193 130;
+  --c-ok-soft: 26 55 44;
+  --c-warn: 226 172 84;
+  --c-warn-soft: 61 47 23;
+  --c-danger: 236 110 110;
+  --c-danger-soft: 69 33 38;
+}
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+    color-scheme: light;
+  }
+  html.dark {
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-base font-sans text-ink antialiased;
+  }
+  #root {
+    min-height: 100dvh;
+  }
+}
+
+@layer utilities {
+  .tnum {
+    font-variant-numeric: tabular-nums;
+  }
+  .gradient-primary {
+    background-image: linear-gradient(135deg, rgb(var(--c-primary)), rgb(var(--c-primary2)));
+  }
+  .text-gradient-primary {
+    background-image: linear-gradient(135deg, rgb(var(--c-primary)), rgb(var(--c-primary2)));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  .pt-safe {
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+  .animate-rise {
+    animation: rise 0.28s ease-out both;
+  }
+  .animate-pop {
+    animation: pop 0.18s ease-out both;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 彩带（本地渲染，不从 CDN 加载） */
+.confetti-piece {
+  position: absolute;
+  top: -3vh;
+  width: 8px;
+  height: 13px;
+  border-radius: 2px;
+  animation: confetti-fall linear forwards;
+  pointer-events: none;
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(var(--dx, 0px), 108vh, 0) rotate(720deg);
+    opacity: 0.85;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .confetti-piece {
+    display: none;
+  }
+}

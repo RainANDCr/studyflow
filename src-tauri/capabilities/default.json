@@ -1,0 +1,10 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "主窗口默认能力：核心 + SQL 插件（SQLite 本地数据库）",
+  "windows": ["main"],
+  "permissions": [
+    "core:default",
+    "sql:default"
+  ]
+}
