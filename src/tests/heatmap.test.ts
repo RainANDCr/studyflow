@@ -6,7 +6,8 @@ import type { FocusSession } from '../domain/types'
 function session(p: Partial<FocusSession>): FocusSession {
   return {
     id: 'f1', goalId: null, milestoneId: null,
-    startedAt: '2026-03-15T10:00:00+08:00', endedAt: '2026-03-15T10:30:00+08:00',
+    startedAt: new Date(2026, 2, 15, 10, 0, 0, 0).toISOString(),
+    endedAt: new Date(2026, 2, 15, 10, 30, 0, 0).toISOString(),
     plannedSeconds: 1800, focusedSeconds: 1800, status: 'completed',
     linkedCheckinId: null, pausedSeconds: 0, lastPauseAt: null,
     isDemo: false, createdAt: '', updatedAt: '',
@@ -36,7 +37,7 @@ describe('热力图数据', () => {
   })
 
   it('未关联打卡的专注会话计入有效分钟（跨午夜拆分归属）', () => {
-    const start = new Date('2026-03-15T23:50:00+08:00').getTime()
+    const start = new Date(2026, 2, 15, 23, 50, 0, 0).getTime()
     const sessions = [
       session({ id: 'f1', goalId: 'g1', startedAt: new Date(start).toISOString(), endedAt: new Date(start + 30 * 60 * 1000).toISOString(), focusedSeconds: 1800 }),
     ]

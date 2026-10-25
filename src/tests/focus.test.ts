@@ -14,7 +14,7 @@ import {
 import { makeCheckin, makeGoal } from './helpers'
 import type { FocusSession } from '../domain/types'
 
-const T0 = new Date('2026-03-15T22:00:00+08:00').getTime() // 本地 22:00（跨午夜用例起点）
+const T0 = new Date(2026, 2, 15, 22, 0, 0, 0).getTime() // 本地（运行环境时区）3-15 22:00，跨午夜用例起点
 
 function session(p: Partial<FocusSession>): FocusSession {
   return {
@@ -139,7 +139,7 @@ describe('跨午夜会话拆分', () => {
   })
 
   it('23:50–00:20 跨午夜：拆成两天，秒数合计精确', () => {
-    const start = new Date('2026-03-15T23:50:00+08:00').getTime()
+    const start = new Date(2026, 2, 15, 23, 50, 0, 0).getTime()
     const s = session({
       startedAt: new Date(start).toISOString(),
       endedAt: new Date(start + 30 * 60 * 1000).toISOString(),
