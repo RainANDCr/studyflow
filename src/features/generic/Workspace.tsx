@@ -123,7 +123,7 @@ export function WorkspaceSettingsCard() {
 
 export function TopBarActions() {
   const [pref, setPref] = useThemePreference()
-  const repoUrl = (import.meta.env.VITE_GITHUB_REPO as string | undefined) ?? 'https://github.com/your-name/studyflow'
+  const repoUrl = (import.meta.env.VITE_GITHUB_REPO as string | undefined) ?? 'https://github.com/RainANDCr/studyflow'
   const next = pref === 'dark' ? 'light' : pref === 'light' ? 'system' : 'dark'
   const icon = pref === 'dark' ? <IconMoon /> : pref === 'light' ? <IconSun /> : <IconMonitor />
   const label = pref === 'dark' ? '深色' : pref === 'light' ? '浅色' : '跟随系统'
