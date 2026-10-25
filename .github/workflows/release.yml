@@ -35,14 +35,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
+      # sdkmanager（cmdline-tools 16+）需要 Java 17+，必须先于 setup-android 设置
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 17
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
       - uses: android-actions/setup-android@v3
       - name: Accept SDK licenses & install NDK/platform
         run: |
