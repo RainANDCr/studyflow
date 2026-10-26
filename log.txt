@@ -1,0 +1,228 @@
+﻿2026-10-26T15:50:13.8357383Z Current runner version: '2.338.0'
+2026-10-26T15:50:13.8379250Z ##[group]Runner Image Provisioner
+2026-10-26T15:50:13.8380047Z Hosted Compute Agent
+2026-10-26T15:50:13.8380529Z Version: 20261021.618
+2026-10-26T15:50:13.8381070Z Commit: 21505ad2541d5be6135ed84fc33697146cf75b8e
+2026-10-26T15:50:13.8381668Z Build Date: 2026-10-21T00:45:21Z
+2026-10-26T15:50:13.8382234Z Worker ID: {70c7b853-9ff0-4947-901a-d8c0e0284dde}
+2026-10-26T15:50:13.8382836Z Region: westus3
+2026-10-26T15:50:13.8383320Z Cloud: Azure
+2026-10-26T15:50:13.8383781Z ##[endgroup]
+2026-10-26T15:50:13.8384917Z ##[group]Operating System
+2026-10-26T15:50:13.8385455Z Ubuntu
+2026-10-26T15:50:13.8386151Z 24.04.5
+2026-10-26T15:50:13.8386581Z LTS
+2026-10-26T15:50:13.8386988Z ##[endgroup]
+2026-10-26T15:50:13.8387500Z ##[group]Runner Image
+2026-10-26T15:50:13.8388021Z Image: ubuntu-24.04
+2026-10-26T15:50:13.8388526Z Version: 20261012.334.1
+2026-10-26T15:50:13.8389577Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261012.334/images/ubuntu/Ubuntu2404-Readme.md
+2026-10-26T15:50:13.8390850Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261012.334
+2026-10-26T15:50:13.8391644Z ##[endgroup]
+2026-10-26T15:50:13.8392584Z ##[group]GITHUB_TOKEN Permissions
+2026-10-26T15:50:13.8394104Z Contents: write
+2026-10-26T15:50:13.8394707Z Metadata: read
+2026-10-26T15:50:13.8395190Z ##[endgroup]
+2026-10-26T15:50:13.8397241Z Secret source: Actions
+2026-10-26T15:50:13.8398509Z Cache mode: write
+2026-10-26T15:50:13.8399089Z Prepare workflow directory
+2026-10-26T15:50:13.8681656Z Prepare all required actions
+2026-10-26T15:50:13.8722619Z Getting action download info
+2026-10-26T15:50:14.2167862Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-10-26T15:50:14.3299571Z Download action repository 'actions/setup-java@v4' (SHA:cf277c60eb25467037889841efdb72551f06f6c3)
+2026-10-26T15:50:15.2951890Z Download action repository 'actions/setup-node@v4' (SHA:49933ea5288caeca8642d1e84afbd3f7d6820020)
+2026-10-26T15:50:15.4002277Z Download action repository 'dtolnay/rust-toolchain@stable' (SHA:b725eda525362e7cf34af9a7243cac1e3f01a7ec)
+2026-10-26T15:50:15.6473289Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+2026-10-26T15:50:15.9285393Z Complete job name: build-android
+2026-10-26T15:50:16.0041867Z ##[group]Run actions/checkout@v4
+2026-10-26T15:50:16.0042599Z with:
+2026-10-26T15:50:16.0042985Z   repository: RainANDCr/studyflow
+2026-10-26T15:50:16.0046840Z   token: ***
+2026-10-26T15:50:16.0047230Z   ssh-strict: true
+2026-10-26T15:50:16.0047607Z   ssh-user: git
+2026-10-26T15:50:16.0047990Z   persist-credentials: true
+2026-10-26T15:50:16.0048417Z   clean: true
+2026-10-26T15:50:16.0048796Z   sparse-checkout-cone-mode: true
+2026-10-26T15:50:16.0049291Z   fetch-depth: 1
+2026-10-26T15:50:16.0049670Z   fetch-tags: false
+2026-10-26T15:50:16.0050059Z   show-progress: true
+2026-10-26T15:50:16.0050436Z   lfs: false
+2026-10-26T15:50:16.0050798Z   submodules: false
+2026-10-26T15:50:16.0051209Z   set-safe-directory: true
+2026-10-26T15:50:16.0051634Z   allow-unsafe-pr-checkout: false
+2026-10-26T15:50:16.0052317Z ##[endgroup]
+2026-10-26T15:50:16.0984500Z Syncing repository: RainANDCr/studyflow
+2026-10-26T15:50:16.0986809Z ##[group]Getting Git version info
+2026-10-26T15:50:16.0987644Z Working directory is '/home/runner/work/studyflow/studyflow'
+2026-10-26T15:50:16.0989029Z [command]/usr/bin/git version
+2026-10-26T15:50:16.1047096Z git version 2.55.0
+2026-10-26T15:50:16.1068530Z ##[endgroup]
+2026-10-26T15:50:16.1082156Z Temporarily overriding HOME='/home/runner/work/_temp/fa4dc0da-f4ae-4f1f-acf6-c69a4da1ed5f' before making global git config changes
+2026-10-26T15:50:16.1083894Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-26T15:50:16.1089403Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/studyflow/studyflow
+2026-10-26T15:50:16.1138215Z Deleting the contents of '/home/runner/work/studyflow/studyflow'
+2026-10-26T15:50:16.1148659Z ##[group]Initializing the repository
+2026-10-26T15:50:16.1157001Z [command]/usr/bin/git init /home/runner/work/studyflow/studyflow
+2026-10-26T15:50:16.2065924Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-26T15:50:16.2067434Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-26T15:50:16.2068659Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-26T15:50:16.2069325Z hint: call:
+2026-10-26T15:50:16.2069678Z hint:
+2026-10-26T15:50:16.2070133Z hint: 	git config --global init.defaultBranch <name>
+2026-10-26T15:50:16.2070658Z hint:
+2026-10-26T15:50:16.2071316Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-26T15:50:16.2072503Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-26T15:50:16.2073525Z hint:
+2026-10-26T15:50:16.2073900Z hint: 	git branch -m <name>
+2026-10-26T15:50:16.2074312Z hint:
+2026-10-26T15:50:16.2074875Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-26T15:50:16.2075923Z Initialized empty Git repository in /home/runner/work/studyflow/studyflow/.git/
+2026-10-26T15:50:16.2078166Z [command]/usr/bin/git remote add origin https://github.com/RainANDCr/studyflow
+2026-10-26T15:50:16.2126552Z ##[endgroup]
+2026-10-26T15:50:16.2127245Z ##[group]Disabling automatic garbage collection
+2026-10-26T15:50:16.2129864Z [command]/usr/bin/git config --local gc.auto 0
+2026-10-26T15:50:16.2159828Z ##[endgroup]
+2026-10-26T15:50:16.2160466Z ##[group]Setting up auth
+2026-10-26T15:50:16.2165626Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-26T15:50:16.2196062Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-26T15:50:16.2506712Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-26T15:50:16.2539825Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-26T15:50:16.2738421Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-26T15:50:16.2771194Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-26T15:50:16.2967351Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-10-26T15:50:16.3005287Z ##[endgroup]
+2026-10-26T15:50:16.3006338Z ##[group]Fetching the repository
+2026-10-26T15:50:16.3012950Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +7debfc92d842999766d5d1f203649d3187016a06:refs/tags/v0.2.0
+2026-10-26T15:50:17.2529294Z From https://github.com/RainANDCr/studyflow
+2026-10-26T15:50:17.2530880Z  * [new ref]         7debfc92d842999766d5d1f203649d3187016a06 -> v0.2.0
+2026-10-26T15:50:17.2535286Z ##[endgroup]
+2026-10-26T15:50:17.2537219Z ##[group]Determining the checkout info
+2026-10-26T15:50:17.2539014Z ##[endgroup]
+2026-10-26T15:50:17.2541729Z [command]/usr/bin/git sparse-checkout disable
+2026-10-26T15:50:17.2592450Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-10-26T15:50:17.2622287Z ##[group]Checking out the ref
+2026-10-26T15:50:17.2625503Z [command]/usr/bin/git checkout --progress --force refs/tags/v0.2.0
+2026-10-26T15:50:17.3821463Z Note: switching to 'refs/tags/v0.2.0'.
+2026-10-26T15:50:17.3822376Z 
+2026-10-26T15:50:17.3823154Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-10-26T15:50:17.3825185Z changes and commit them, and you can discard any commits you make in this
+2026-10-26T15:50:17.3827536Z state without impacting any branches by switching back to a branch.
+2026-10-26T15:50:17.3829220Z 
+2026-10-26T15:50:17.3830062Z If you want to create a new branch to retain commits you create, you may
+2026-10-26T15:50:17.3832052Z do so (now or later) by using -c with the switch command. Example:
+2026-10-26T15:50:17.3833109Z 
+2026-10-26T15:50:17.3833532Z   git switch -c <new-branch-name>
+2026-10-26T15:50:17.3834310Z 
+2026-10-26T15:50:17.3834738Z Or undo this operation with:
+2026-10-26T15:50:17.3835528Z 
+2026-10-26T15:50:17.3836146Z   git switch -
+2026-10-26T15:50:17.3836658Z 
+2026-10-26T15:50:17.3837473Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-10-26T15:50:17.3838712Z 
+2026-10-26T15:50:17.3839966Z HEAD is now at 7debfc9 fix(android): 移除 release strip（保留 Tauri 运行时符号）；README 加在线地址与完整用户手册
+2026-10-26T15:50:17.3843806Z ##[endgroup]
+2026-10-26T15:50:17.3875347Z [command]/usr/bin/git log -1 --format=%H
+2026-10-26T15:50:17.3899284Z 7debfc92d842999766d5d1f203649d3187016a06
+2026-10-26T15:50:17.4247226Z ##[group]Run actions/setup-java@v4
+2026-10-26T15:50:17.4248123Z with:
+2026-10-26T15:50:17.4248779Z   distribution: temurin
+2026-10-26T15:50:17.4249520Z   java-version: 17
+2026-10-26T15:50:17.4250225Z   java-package: jdk
+2026-10-26T15:50:17.4250933Z   check-latest: false
+2026-10-26T15:50:17.4251651Z   server-id: github
+2026-10-26T15:50:17.4252379Z   server-username: GITHUB_ACTOR
+2026-10-26T15:50:17.4253231Z   server-password: GITHUB_TOKEN
+2026-10-26T15:50:17.4254068Z   overwrite-settings: true
+2026-10-26T15:50:17.4254842Z   job-status: success
+2026-10-26T15:50:17.4262615Z   token: ***
+2026-10-26T15:50:17.4263289Z ##[endgroup]
+2026-10-26T15:50:17.5592280Z ##[warning]setup-java v4 is deprecated and will no longer receive updates. Please migrate to actions/setup-java@v5.
+2026-10-26T15:50:17.5603609Z ##[group]Installed distributions
+2026-10-26T15:50:17.5976995Z Resolved Java 17.0.20+1 from tool-cache
+2026-10-26T15:50:17.5978422Z Setting Java 17.0.20+1 as the default
+2026-10-26T15:50:17.5987121Z (node:2049) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-26T15:50:17.5990226Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-26T15:50:17.5992337Z Creating toolchains.xml for JDK version 17 from temurin
+2026-10-26T15:50:17.6045418Z Writing to /home/runner/.m2/toolchains.xml
+2026-10-26T15:50:17.6046622Z 
+2026-10-26T15:50:17.6047076Z Java configuration:
+2026-10-26T15:50:17.6048217Z   Distribution: temurin
+2026-10-26T15:50:17.6049369Z   Version: 17.0.20+1
+2026-10-26T15:50:17.6050816Z   Path: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.20-1/x64
+2026-10-26T15:50:17.6052058Z 
+2026-10-26T15:50:17.6053196Z ##[endgroup]
+2026-10-26T15:50:17.6071097Z Creating settings.xml with server-id: github
+2026-10-26T15:50:17.6107498Z Writing to /home/runner/.m2/settings.xml
+2026-10-26T15:50:17.6371776Z ##[group]Run actions/setup-node@v4
+2026-10-26T15:50:17.6372679Z with:
+2026-10-26T15:50:17.6373331Z   node-version: 20
+2026-10-26T15:50:17.6374027Z   cache: npm
+2026-10-26T15:50:17.6374716Z   always-auth: false
+2026-10-26T15:50:17.6375643Z   check-latest: false
+2026-10-26T15:50:17.6383126Z   token: ***
+2026-10-26T15:50:17.6383800Z env:
+2026-10-26T15:50:17.6384744Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.20-1/x64
+2026-10-26T15:50:17.6386342Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.20-1/x64
+2026-10-26T15:50:17.6387544Z ##[endgroup]
+2026-10-26T15:50:17.7555092Z Attempting to download 20...
+2026-10-26T15:50:17.7639307Z (node:2061) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-26T15:50:17.7641616Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-26T15:50:18.9003780Z Acquiring 20.20.2 - x64 from https://github.com/actions/node-versions/releases/download/20.20.2-23521894959/node-20.20.2-linux-x64.tar.gz
+2026-10-26T15:50:19.4486498Z Extracting ...
+2026-10-26T15:50:19.4581951Z [command]/usr/bin/tar xz --strip 1 --warning=no-unknown-keyword --overwrite -C /home/runner/work/_temp/1f2f718b-2390-46c7-97eb-4c1d2157cda0 -f /home/runner/work/_temp/af578ce7-650a-493f-b81d-b32660f2a68c
+2026-10-26T15:50:20.3140435Z Adding to the cache ...
+2026-10-26T15:50:22.2735426Z ##[group]Environment details
+2026-10-26T15:50:22.4531808Z node: v20.20.2
+2026-10-26T15:50:22.4532151Z npm: 10.8.2
+2026-10-26T15:50:22.4532374Z yarn: 1.22.22
+2026-10-26T15:50:22.4533022Z ##[endgroup]
+2026-10-26T15:50:22.4548091Z [command]/opt/hostedtoolcache/node/20.20.2/x64/bin/npm config get cache
+2026-10-26T15:50:22.5394643Z /home/runner/.npm
+2026-10-26T15:50:22.7717645Z Cache hit for: node-cache-Linux-x64-npm-5d5411936f2f0f1690fd445794499f68c79b130748fbc3084ac1be1845a9e6ec
+2026-10-26T15:50:22.7796283Z (node:2061) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-10-26T15:50:23.9997460Z Received 21631340 of 38408556 (56.3%), 20.6 MBs/sec
+2026-10-26T15:50:24.9982100Z Received 34214252 of 38408556 (89.1%), 16.3 MBs/sec
+2026-10-26T15:50:25.9982217Z Received 34214252 of 38408556 (89.1%), 10.9 MBs/sec
+2026-10-26T15:50:26.0363879Z Received 38408556 of 38408556 (100.0%), 12.1 MBs/sec
+2026-10-26T15:50:26.0364363Z Cache Size: ~37 MB (38408556 B)
+2026-10-26T15:50:26.0459633Z [command]/usr/bin/tar -xf /home/runner/work/_temp/1fc1f51d-40e0-4578-aa15-08ab2d227313/cache.tzst -P -C /home/runner/work/studyflow/studyflow --use-compress-program unzstd
+2026-10-26T15:50:26.1811083Z Cache restored successfully
+2026-10-26T15:50:26.1834707Z Cache restored from key: node-cache-Linux-x64-npm-5d5411936f2f0f1690fd445794499f68c79b130748fbc3084ac1be1845a9e6ec
+2026-10-26T15:50:26.2151759Z ##[group]Run yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null 2>&1 || true
+2026-10-26T15:50:26.2152451Z [36;1myes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null 2>&1 || true[0m
+2026-10-26T15:50:26.2153105Z [36;1m"$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --install "ndk;27.0.12077973" "platforms;android-37" > /dev/null 2>&1[0m
+2026-10-26T15:50:26.2153610Z [36;1mecho "NDK_HOME=$ANDROID_HOME/ndk/27.0.12077973" >> "$GITHUB_ENV"[0m
+2026-10-26T15:50:26.2748594Z shell: /usr/bin/bash -e {0}
+2026-10-26T15:50:26.2748892Z env:
+2026-10-26T15:50:26.2749176Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.20-1/x64
+2026-10-26T15:50:26.2749594Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.20-1/x64
+2026-10-26T15:50:26.2749937Z ##[endgroup]
+2026-10-26T15:50:32.2465475Z yes: standard output: Broken pipe
+2026-10-26T15:50:33.4923534Z ##[error]Process completed with exit code 1.
+2026-10-26T15:50:33.4967483Z ##[group]Run tail -n 80 /tmp/apk-build.log >> "$GITHUB_STEP_SUMMARY" || true
+2026-10-26T15:50:33.4967904Z [36;1mtail -n 80 /tmp/apk-build.log >> "$GITHUB_STEP_SUMMARY" || true[0m
+2026-10-26T15:50:33.5024961Z shell: /usr/bin/bash -e {0}
+2026-10-26T15:50:33.5025194Z env:
+2026-10-26T15:50:33.5025458Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.20-1/x64
+2026-10-26T15:50:33.5026026Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.20-1/x64
+2026-10-26T15:50:33.5026332Z ##[endgroup]
+2026-10-26T15:50:33.5119201Z tail: cannot open '/tmp/apk-build.log' for reading: No such file or directory
+2026-10-26T15:50:33.5224053Z Post job cleanup.
+2026-10-26T15:50:33.6320607Z (node:2243) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-26T15:50:33.6321277Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-26T15:50:33.6500040Z Post job cleanup.
+2026-10-26T15:50:33.7277011Z [command]/usr/bin/git version
+2026-10-26T15:50:33.7309574Z git version 2.55.0
+2026-10-26T15:50:33.7352960Z Temporarily overriding HOME='/home/runner/work/_temp/ef15090d-bcde-40df-b439-0fd89ffe751e' before making global git config changes
+2026-10-26T15:50:33.7354299Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-26T15:50:33.7358797Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/studyflow/studyflow
+2026-10-26T15:50:33.7410441Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-26T15:50:33.7446149Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-26T15:50:33.7663559Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-26T15:50:33.7707394Z http.https://github.com/.extraheader
+2026-10-26T15:50:33.7717685Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-10-26T15:50:33.7738650Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-26T15:50:33.7957818Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-26T15:50:33.7990081Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-26T15:50:33.8331404Z Cleaning up orphan processes
+2026-10-26T15:50:33.8636399Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-java@v4, actions/setup-node@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
