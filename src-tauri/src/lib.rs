@@ -1,6 +1,8 @@
 /// 知行 StudyFlow 桌面/移动入口。
 /// 数据层全部在前端 TypeScript（StudyRepository 适配器）中，
 /// 原生侧只负责窗口与 SQLite 插件（tauri-plugin-sql，数据库文件在应用私有目录）。
+/// mobile_entry_point 为 Android/iOS 生成必需的导出符号（桌面构建会忽略该属性）。
+#[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_sql::Builder::default().build())
