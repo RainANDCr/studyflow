@@ -2,7 +2,9 @@
 
 产出：可直接运行的 `studyflow.exe`（debug）与 **NSIS `setup.exe` 安装包**（release）。
 
-> ⚠️ 当前状态如实说明：本仓库已包含完整的 Tauri 2 工程配置（`src-tauri/`，含 SQLite 插件、迁移、图标、NSIS 配置），但**本机未安装 Rust 工具链，Windows 产物未在本机验证**。以下步骤按 Tauri 2 官方文档（https://v2.tauri.app/）整理，装好依赖后应可直接复现。
+> ✅ 2026-10-26 已本机验证：产物 `src-tauri/target/release/bundle/nsis/知行 StudyFlow_0.1.0_x64-setup.exe` 与免安装 `studyflow.exe` 构建成功；启动冒烟通过（进程稳定，自动创建 `%APPDATA%\app.studyflow.zxing\studyflow.db`）。本机环境：VS2022 Community（E:\develop\vs2022，含 C++ 工作负载）+ rustup 用户级安装。
+>
+> 本机构建备注：会话式终端并行编译大量 link.exe 易触发 `0xc0000142 STATUS_DLL_INIT_FAILED`（桌面堆耗尽），设 `CARGO_BUILD_JOBS=2` 解决；NSIS 工具包 GitHub 直连超时，经镜像下载后由 Tauri 校验哈希使用。
 
 ## 1. 环境准备
 

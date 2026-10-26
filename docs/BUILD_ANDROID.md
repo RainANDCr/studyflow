@@ -2,7 +2,20 @@
 
 产出：可安装到真机的 **APK**（debug 与 release 两种），复用同一 Tauri 2 工程（不另写 Android 项目）。
 
-> ⚠️ 当前状态如实说明：`src-tauri/` 已包含 Android 所需的图标（mipmap 已生成于 `src-tauri/icons/android/`）、`bundle.android.minSdkVersion=24` 等配置；**本机未安装 Android SDK/NDK 与 Rust Android target，APK 未在本机验证**。以下步骤按 Tauri 2 官方文档（https://v2.tauri.app/start/prerequisites/）整理。
+> ✅ 2026-10-26 已本机验证：产出 `src-tauri/gen/android/app/build/outputs/apk/universal/debug/app-universal-debug.apk`（8.7MB，含 4 个 ABI 的 `libstudyflow_lib.so` + 全部前端 assets）。真机安装验收待用户执行。
+>
+> 本机环境：Android SDK 在 `E:\develop\Android\Sdk`（platform 34/37、build-tools 34、NDK 27.1）、Temurin JDK 21 在 `E:\develop\Android\jdk`、Rust 4 个 android target。
+>
+> **本机构建三条坑（均已解决，留档）**：
+> 1. 未开启 Windows 开发者模式时 Tauri CLI 无法创建符号链接（jniLibs 部署失败）→ 改用 `cargo ndk -t arm64-v8a -t armeabi-v7a -t x86 -t x86_64 -o gen/android/app/src/main/jniLibs build --release` 交叉编译并复制；前端 dist 需手动拷贝到 `gen/android/app/src/main/assets/`。
+> 2. AGP 拒绝含中文的项目路径（「学习工作台」）→ `mklink /J E:\zcode\studyflow-b <项目路径>` 建 ASCII 联接，从联接路径跑 Gradle；`gradle.properties` 中 `android.overridePathCheck=true` 保留。
+> 3. `local.properties` 的 `sdk.dir` 用正斜杠写法（`E:/develop/Android/Sdk`），反斜杠转义错误会报「文件名、目录名或卷标语法不正确」。
+>
+> Gradle 打包命令（从联接路径，排除 rust 任务）：
+> ```bash
+> cd E:\zcode\studyflow-b\src-tauri\gen\android
+> ./gradlew.bat assembleUniversalDebug -x rustBuildUniversalDebug -x rustBuildArm64Debug -x rustBuildArmDebug -x rustBuildX86Debug -x rustBuildX86_64Debug
+> ```
 
 ## 1. 环境准备
 
