@@ -47,7 +47,7 @@ jobs:
       - name: Accept SDK licenses & install NDK/platform
         run: |
           yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null 2>&1 || true
-          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --install "ndk;27.0.12077973" > /dev/null 2>&1
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --install "ndk;27.0.12077973" "platforms;android-37" > /dev/null 2>&1
           echo "NDK_HOME=$ANDROID_HOME/ndk/27.0.12077973" >> "$GITHUB_ENV"
       - uses: dtolnay/rust-toolchain@stable
         with:
@@ -57,7 +57,12 @@ jobs:
       - name: Init Android project (if gen/ absent)
         run: npm run tauri android init
       - name: Build debug APK
-        run: npm run tauri android build -- --apk
+        run: |
+          set -o pipefail
+          npm run tauri android build -- --apk 2>&1 | tee /tmp/apk-build.log
+      - name: Print build log tail on failure
+        if: failure()
+        run: tail -n 80 /tmp/apk-build.log >> "$GITHUB_STEP_SUMMARY" || true
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
