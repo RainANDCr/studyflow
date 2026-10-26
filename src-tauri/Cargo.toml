@@ -24,4 +24,5 @@ codegen-units = 1
 lto = true
 opt-level = "s"
 panic = "abort"
-strip = true
+# 注意：不要加 strip = true —— 会剥掉 Tauri Android 端验证所需的运行时符号
+# （报错 "does not include required runtime symbols"），桌面端不受影响。
