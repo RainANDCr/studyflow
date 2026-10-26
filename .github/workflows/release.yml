@@ -102,7 +102,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            release/windows/*.exe
+            release/windows/**/*.exe
             release/android/**/*.apk
           body: |
             知行 StudyFlow 安装包（由 GitHub Actions 云端构建）
