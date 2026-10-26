@@ -1,7 +1,7 @@
 {
   "name": "studyflow",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "知行 StudyFlow — 把终点变成今天的一小步（本地离线学习目标管理）",
   "type": "module",
   "scripts": {

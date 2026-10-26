@@ -14,8 +14,8 @@
 
 | 平台 | 文件 | 说明 |
 |---|---|---|
-| Windows | `知行 StudyFlow_0.2.0_x64-setup.exe` | 双击安装（仅当前用户），桌面应用，数据存本机 SQLite |
-| Android | `app-universal-debug.apk` | 传到手机直接安装（调试签名，适合自用；正式分发需自配签名） |
+| Windows | `StudyFlow_0.2.0_x64-setup.exe` | 双击安装（仅当前用户），桌面应用，数据存本机 SQLite |
+| Android | `app-universal-debug.apk`（调试签名，可直接安装） | 传到手机直接安装（调试签名，适合自用；正式分发需自配签名） |
 | 便携版 | `studyflow.exe` | Windows 免安装单文件 |
 
 数据说明：**网站、Windows、Android 三端各自独立保存，互不自动同步**（这是产品边界，不是缺陷）。跨端迁移用「我的 → 导出 JSON / 导入 JSON」手动完成。
