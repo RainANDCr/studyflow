@@ -8,17 +8,13 @@
 
 任何设备的浏览器（手机 / 平板 / 电脑）打开即用。网站数据保存在你浏览器的 IndexedDB 中，刷新、重启浏览器都不会丢失；**但清除浏览器站点数据会删掉它**，请养成用「我的 → 导出 JSON」备份的习惯。
 
-## 📦 下载安装包（Windows / Android）
+## 📦 Windows 便携版（点开就用）
 
-安装包由 GitHub Actions 云端自动构建，发布在 [Releases 页面](https://github.com/RainANDCr/studyflow/releases)：
+`studyflow.exe` —— 单文件、免安装，双击直接运行，数据保存在本机应用数据目录的 SQLite 中。
 
-| 平台 | 文件 | 说明 |
-|---|---|---|
-| Windows | `StudyFlow_0.2.0_x64-setup.exe` | 双击安装（仅当前用户），桌面应用，数据存本机 SQLite |
-| Android | `app-universal-debug.apk`（调试签名，可直接安装） | 传到手机直接安装（调试签名，适合自用；正式分发需自配签名） |
-| 便携版 | `studyflow.exe` | Windows 免安装单文件 |
+获取方式：本地构建 `npm run tauri build`，产物在 `src-tauri/target/release/studyflow.exe`。
 
-数据说明：**网站、Windows、Android 三端各自独立保存，互不自动同步**（这是产品边界，不是缺陷）。跨端迁移用「我的 → 导出 JSON / 导入 JSON」手动完成。
+数据说明：**网站与桌面版各自独立保存，互不自动同步**（产品边界）。跨端迁移用「我的 → 导出 JSON / 导入 JSON」手动完成。应用首次启动为空库，直接「新建学习目标」即可，无任何预置演示数据。
 
 ---
 

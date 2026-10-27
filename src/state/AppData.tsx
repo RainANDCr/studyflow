@@ -17,7 +17,6 @@ import { systemClock } from '../domain/clock'
 import { computeGoalProgress } from '../domain/progress'
 import { createRepository } from '../storage'
 import type { StorageKind, StudyRepository } from '../storage/types'
-import { buildSeedData } from '../storage/seed'
 
 export interface ImportResult {
   goals: number
@@ -211,18 +210,10 @@ export function AppDataProvider({ children }: { children: ReactNode }) {
     try {
       const { repo: repository, kind } = await createRepository()
       await repository.init()
-      // 首次启动且库为空、从未完成过种子初始化 → 插入演示数据（仅一次）
+      // 首次启动为空库：不插入任何演示数据（用户要求）；仅初始化设置行
       const existingSettings = await repository.getSettings()
       if (!existingSettings) {
-        const existingGoals = await repository.getAllGoals()
-        if (existingGoals.length === 0) {
-          const seed = buildSeedData(todayStr(systemClock))
-          for (const g of seed.goals) await repository.createGoal(g)
-          for (const c of seed.checkins) await repository.addCheckin(c)
-          await repository.saveSettings(seed.settings)
-        } else {
-          await repository.saveSettings({ schemaVersion: SCHEMA_VERSION, demoSeeded: true, lastSavedAt: null })
-        }
+        await repository.saveSettings({ schemaVersion: SCHEMA_VERSION, demoSeeded: true, lastSavedAt: null })
       }
       await loadAll(repository)
       setRepo(repository)
