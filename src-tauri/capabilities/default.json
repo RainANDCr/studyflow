@@ -6,9 +6,9 @@
   "permissions": [
     "core:default",
     "sql:default",
-    "sql:load",
-    "sql:execute",
-    "sql:select",
-    "sql:close"
+    "sql:allow-load",
+    "sql:allow-execute",
+    "sql:allow-select",
+    "sql:allow-close"
   ]
 }
