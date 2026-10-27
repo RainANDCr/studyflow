@@ -10,9 +10,9 @@
 
 ## 📦 Windows 便携版（点开就用）
 
-`studyflow.exe` —— 单文件、免安装，双击直接运行，数据保存在本机应用数据目录的 SQLite 中。
+**直接下载：[Releases 页面](https://github.com/RainANDCr/studyflow/releases/latest)** → `StudyFlow.exe`（约 4.5 MB）
 
-获取方式：本地构建 `npm run tauri build`，产物在 `src-tauri/target/release/studyflow.exe`。
+单文件、免安装，双击直接运行，数据保存在本机应用数据目录的 SQLite 中，重启不丢。（也可自行构建：`npm run tauri build`，产物在 `src-tauri/target/release/studyflow.exe`。）
 
 数据说明：**网站与桌面版各自独立保存，互不自动同步**（产品边界）。跨端迁移用「我的 → 导出 JSON / 导入 JSON」手动完成。应用首次启动为空库，直接「新建学习目标」即可，无任何预置演示数据。
 
