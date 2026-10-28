@@ -7,3 +7,6 @@ src-tauri/gen/
 vitest-results/
 android-log.txt
 log.txt
+screen.png
+win.png
+win2.png
