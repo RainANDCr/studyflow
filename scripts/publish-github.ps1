@@ -1,8 +1,10 @@
 ﻿#Requires -Version 5.1
 $ErrorActionPreference = 'Stop'
+[Console]::OutputEncoding = New-Object System.Text.UTF8Encoding($false)
+$OutputEncoding = [Console]::OutputEncoding
 $repository = 'RainANDCr/studyflow'
 $tag = 'mobile-fixes-20261105-r2'
-$baseline = '77b3d68be3b45a1debff99a950e2a1af9c77ae89'
+$baseline = '79d73c585b826cb88f922201b29f5ba43b6ed99b'
 $sourceRoot = Split-Path $PSScriptRoot -Parent
 
 # Hashes identify the source and binaries verified for this release.
