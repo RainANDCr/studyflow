@@ -173,17 +173,15 @@ export function SettingsPage() {
     if (!file) return
     try {
       const text = await file.text()
-      const json: unknown = JSON.parse(text)
+      const json: unknown = JSON.parse(text.replace(/^\uFEFF/, ''))
       const parsed = exportPayloadSchema.safeParse(json)
       if (!parsed.success) {
-        toast.error(`导入失败：文件格式不正确（${parsed.error.issues[0]?.message ?? '结构校验未通过'}）`)
+        const issue = parsed.error.issues[0]
+        const field = issue?.path.length ? `${issue.path.join('.')}：` : ''
+        toast.error(`导入失败：文件格式不正确（${field}${issue?.message ?? '结构校验未通过'}）`)
         return
       }
       const p = parsed.data
-      if (p.schemaVersion !== 1) {
-        toast.error(`导入失败：不支持的 schemaVersion=${p.schemaVersion}`)
-        return
-      }
       const ids = new Set<string>()
       let dup = 0
       for (const item of [...p.goals, ...p.checkins]) {

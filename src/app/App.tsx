@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { AppDataProvider, useAppData } from '../state/AppData'
 import { ToastProvider, useToast } from '../components/feedback'
 import { Button, Skeleton } from '../components/ui'
@@ -15,6 +15,7 @@ import { TopBarActions } from '../features/generic/Workspace'
 import { DashboardPage } from '../features/dashboard/DashboardPage'
 import { WeeklyPage } from '../features/weekly/WeeklyPage'
 import { SettingsPage } from '../features/settings/SettingsPage'
+import { useMobileTabSwipe } from './useMobileTabSwipe'
 
 type TabKey = 'today' | 'dashboard' | 'weekly' | 'settings'
 
@@ -77,7 +78,31 @@ function ShellSkeleton() {
 function AppShell() {
   const { ready, initError, retry, justCompletedGoalId, clearCelebration, goals } = useAppData()
   const [tab, setTab] = useState<TabKey>('today')
+  const pageRef = useRef<HTMLDivElement>(null)
+  const swipeDirection = useRef<-1 | 1 | null>(null)
   const toast = useToast()
+  const swipeHandlers = useMobileTabSwipe((direction) => {
+    const index = TABS.findIndex((item) => item.key === tab)
+    const next = TABS[index + direction]
+    if (!next) return
+    swipeDirection.current = direction
+    setTab(next.key)
+    window.scrollTo(0, 0)
+  })
+
+  useLayoutEffect(() => {
+    const direction = swipeDirection.current
+    swipeDirection.current = null
+    if (direction === null || !pageRef.current || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const animation = pageRef.current.animate(
+      [
+        { transform: `translateX(${direction * 36}px)`, opacity: 0.65 },
+        { transform: 'translateX(0)', opacity: 1 },
+      ],
+      { duration: 240, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' },
+    )
+    return () => animation.cancel()
+  }, [tab])
 
   const completedGoal = justCompletedGoalId ? goals.find((g) => g.id === justCompletedGoalId) : null
   useEffect(() => {
@@ -98,7 +123,7 @@ function AppShell() {
   if (!ready) return <ShellSkeleton />
 
   return (
-    <div className="min-h-dvh">
+    <div className="pt-safe min-h-dvh">
       {/* PC 左侧边栏 */}
       <aside className="fixed inset-y-0 left-0 z-40 hidden w-60 flex-col border-r border-line/70 bg-surface px-4 py-5 lg:flex">
         <Logo />
@@ -118,14 +143,14 @@ function AppShell() {
             </button>
           ))}
         </nav>
-        <div className="mt-auto flex items-center justify-between gap-2 border-t border-line/70 pt-3">
+        <div className="mt-auto flex flex-wrap items-center justify-between gap-2 border-t border-line/70 pt-3">
           <p className="text-[11px] leading-relaxed text-ink3">本地离线应用<br />数据保存在本机</p>
           <TopBarActions />
         </div>
       </aside>
 
       {/* 平板顶部横向导航 */}
-      <header className="pt-safe sticky top-0 z-40 hidden border-b border-line/70 bg-surface/90 backdrop-blur md:block lg:hidden">
+      <header className="sticky top-[env(safe-area-inset-top,0px)] z-40 hidden border-b border-line/70 bg-surface/90 backdrop-blur md:block lg:hidden">
         <div className="mx-auto flex max-w-3xl items-center justify-between px-4 py-2.5">
           <Logo />
           <nav className="flex gap-1" aria-label="主导航">
@@ -147,14 +172,14 @@ function AppShell() {
         </div>
       </header>
 
-      <div className="fixed right-2 top-2 z-40 md:hidden">
+      <div className="sticky top-[env(safe-area-inset-top,0px)] z-40 flex justify-end px-4 py-2 md:hidden">
         <div className="rounded-xl border border-line/70 bg-surface/90 p-0.5 shadow-card backdrop-blur">
           <TopBarActions />
         </div>
       </div>
 
-      <main className="lg:pl-60">
-        <div className="mx-auto w-full max-w-3xl px-4 pb-28 pt-5 md:pb-10 md:pt-6 lg:max-w-4xl">
+      <main className="overflow-x-clip md:overflow-x-visible lg:pl-60" {...swipeHandlers}>
+        <div ref={pageRef} className="mx-auto w-full max-w-3xl px-4 pb-28 pt-5 md:pb-10 md:pt-6 lg:max-w-4xl">
           {tab === 'today' && <TodayPage />}
           {tab === 'dashboard' && <DashboardPage />}
           {tab === 'weekly' && <WeeklyPage />}

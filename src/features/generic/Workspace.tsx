@@ -128,7 +128,7 @@ export function TopBarActions() {
   const icon = pref === 'dark' ? <IconMoon /> : pref === 'light' ? <IconSun /> : <IconMonitor />
   const label = pref === 'dark' ? '深色' : pref === 'light' ? '浅色' : '跟随系统'
   return (
-    <div className="flex items-center gap-1.5">
+    <div className="flex shrink-0 items-center gap-1.5 whitespace-nowrap">
       <button
         type="button"
         onClick={() => setPref(next)}

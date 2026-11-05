@@ -63,6 +63,8 @@ interface Db {
   close(): Promise<void>
 }
 
+type ImportStatement = [sql: string, values: unknown[]]
+
 const b2i = (b: boolean) => (b ? 1 : 0)
 const i2b = (i: unknown) => i === 1 || i === true
 
@@ -486,6 +488,7 @@ function rowToPref(r: PrefRow): StudyCalendarPreference {
 export class TauriSqliteRepository implements StudyRepository {
   readonly kind = 'sqlite' as const
   private db: Db | null = null
+  private importStatements: ImportStatement[] | null = null
 
   private get store(): Db {
     if (!this.db) throw new Error('数据库尚未初始化，请先调用 init()')
@@ -514,6 +517,7 @@ export class TauriSqliteRepository implements StudyRepository {
 
   /** 单连接 SQLite 上用 BEGIN/COMMIT 保证原子性；失败回滚并向上抛错。 */
   private async transaction<T>(fn: () => Promise<T>): Promise<T> {
+    if (this.importStatements) return fn()
     await this.store.execute('BEGIN')
     try {
       const result = await fn()
@@ -1021,6 +1025,26 @@ export class TauriSqliteRepository implements StudyRepository {
   }
 
   async replaceAll(payload: ExportPayloadInput, mode: 'replace' | 'merge'): Promise<{ goals: number; checkins: number; reviews: number; skipped: number }> {
+    const store = this.store
+    const staged = new TauriSqliteRepository()
+    const statements: ImportStatement[] = []
+    staged.importStatements = statements
+    staged.db = {
+      // Replacement reads the empty post-delete state. Merge reads existing rows.
+      select: (sql, values) => mode === 'replace' ? Promise.resolve([]) : store.select(sql, values),
+      execute: async (sql, values = []) => {
+        statements.push([sql, values])
+        return 0
+      },
+      close: async () => {},
+    }
+    const result = await staged.stageImport(payload, mode)
+    const { invoke } = await import('@tauri-apps/api/core')
+    await invoke('import_sqlite_batch', { db: DB_URI, statements })
+    return result
+  }
+
+  private async stageImport(payload: ExportPayloadInput, mode: 'replace' | 'merge') {
     return this.transaction(async () => {
       if (mode === 'replace') {
         await this.store.execute('DELETE FROM mastery_assessments')
@@ -1040,6 +1064,9 @@ export class TauriSqliteRepository implements StudyRepository {
         await this.store.execute('DELETE FROM goals')
         await this.store.execute('DELETE FROM weekly_reviews')
         await this.store.execute('DELETE FROM calendar_prefs')
+        for (const table of Object.values(V4_SQL_NAMES)) {
+          await this.store.execute(`DELETE FROM ${table}`)
+        }
       }
       const existingGoals = new Set((await this.getAllGoals()).map((g) => g.id))
       const existingCheckins = new Set((await this.getAllCheckins()).map((c) => c.id))

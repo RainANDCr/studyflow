@@ -97,16 +97,16 @@ export function TodayPage() {
   return (
     <div className="space-y-4">
       <header className="space-y-3">
-        <div className="flex items-start justify-between gap-3">
-          <div>
-            <h1 className="text-xl font-bold text-ink">
+        <div className="flex flex-col gap-3 md:flex-row md:flex-wrap md:items-start md:justify-between">
+          <div className="min-w-0">
+            <h1 className="text-xl font-bold leading-relaxed text-ink">
               {greeting()}，继续把终点拆成今天的一小步
             </h1>
             <p className="mt-0.5 text-xs text-ink3">
               {formatFullCN(today)} {weekdayShort(today)} · 数据保存在本机
             </p>
           </div>
-          <div className="flex shrink-0 items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <Button variant="secondary" size="sm" onClick={() => setFocusOpen(true)}>
               开始专注
             </Button>

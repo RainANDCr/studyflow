@@ -135,33 +135,34 @@ export function WeeklyPage() {
   return (
     <div className="space-y-4">
       <header>
-        <div className="flex items-center justify-between gap-2">
-          <div>
+        <div className="flex flex-col items-start gap-3 sm:flex-row sm:justify-between">
+          <div className="min-w-0">
             <h1 className="text-xl font-bold text-ink">周报</h1>
             <p className="mt-0.5 text-xs text-ink3">一周 = 周一至周日。本周进行中时，与上周同期（周一至同 weekday）做同口径比较。</p>
           </div>
-          <Button size="sm" variant="secondary" onClick={() => setMode('long')}>
+          <Button size="sm" variant="secondary" className="shrink-0 whitespace-nowrap" onClick={() => setMode('long')}>
             长期报告（月/季/年）
           </Button>
         </div>
       </header>
 
       <Card className="px-4 py-3.5">
-        <div className="flex items-center justify-between gap-2">
+        <div role="group" aria-label="周选择" className="grid grid-cols-2 items-center gap-x-2 gap-y-3 sm:grid-cols-[auto_minmax(0,1fr)_auto]">
           <Button
             size="sm"
             variant="secondary"
+            className="justify-self-start whitespace-nowrap"
             aria-label="上一周"
             onClick={() => setSelectedWeek((w) => addDays(w, -7))}
           >
             <IconChevronLeft /> 上一周
           </Button>
-          <div className="text-center">
-            <p className="text-sm font-semibold text-ink">
-              {rangeText}
-              {isCurrentWeek && <span className="ml-1.5 rounded-md bg-primarySoft px-1.5 py-0.5 text-[11px] font-medium text-primary">本周</span>}
+          <div className="order-first col-span-2 min-w-0 text-center sm:order-none sm:col-span-1">
+            <p className="flex flex-wrap items-center justify-center gap-2 text-sm font-semibold text-ink">
+              <span className="whitespace-nowrap">{rangeText}</span>
+              {isCurrentWeek && <span className="whitespace-nowrap rounded-md bg-primarySoft px-1.5 py-0.5 text-[11px] font-medium text-primary">本周</span>}
             </p>
-            <div className="mt-1 flex justify-center gap-2.5 text-[11px] text-ink3">
+            <div className="mt-2 grid grid-cols-7 text-[11px] text-ink3">
               {weekDates(selectedWeek).map((d) => (
                 <span key={d} className={d === today ? 'font-bold text-primary' : ''}>
                   {weekdayShort(d).slice(1)}
@@ -169,8 +170,8 @@ export function WeeklyPage() {
               ))}
             </div>
           </div>
-          <div className="flex gap-1">
-            <Button size="sm" variant="secondary" disabled={!canGoNext} aria-label="下一周" onClick={() => setSelectedWeek((w) => addDays(w, 7))}>
+          <div className="flex justify-end">
+            <Button size="sm" variant="secondary" className="whitespace-nowrap" disabled={!canGoNext} aria-label="下一周" onClick={() => setSelectedWeek((w) => addDays(w, 7))}>
               下一周 <IconChevronRight />
             </Button>
           </div>

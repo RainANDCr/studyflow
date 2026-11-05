@@ -17,7 +17,7 @@
     "tauri:build": "tauri build",
     "tauri:android:init": "tauri android init",
     "tauri:android:dev": "tauri android dev",
-    "tauri:android:build": "tauri android build --apk",
+    "tauri:android:build": "node scripts/prepare-android.mjs && tauri android build --apk",
     "icon": "node scripts/generate-icon.mjs && tauri icon scripts/icon-source.png"
   },
   "dependencies": {
